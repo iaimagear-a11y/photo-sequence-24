@@ -35,6 +35,15 @@ y verificación profesional del video final.
 - Interfaz en español, pensada para principiantes (pasos guiados, escalado de
   letra y manual completo).
 
+## Verificar integridad de la descarga
+
+Cada versión publica `SHA256SUMS` con el hash SHA-256 de cada archivo. Para comprobar que tu descarga llegó completa y sin alteraciones:
+
+- **Windows (PowerShell):** `Get-FileHash .\NOMBRE_DEL_ARCHIVO -Algorithm SHA256`
+- **Linux:** `sha256sum NOMBRE_DEL_ARCHIVO` (o `sha256sum -c SHA256SUMS` dentro de la carpeta)
+
+El hash calculado debe coincidir con el publicado en [SHA256SUMS](https://github.com/iaimagear-a11y/photo-sequence-24/releases/latest/download/SHA256SUMS). Si coincide, el archivo es exactamente el que publicó el desarrollador.
+
 ---
 
 ## Apoyá el proyecto
@@ -43,3 +52,8 @@ La app es gratuita. Si te sirvió y querés colaborar con su desarrollo,
 podés transferir el monto que quieras por alias (sin comisiones, al instante):
 
 **Alias: `mariano.foto.mdl`**
+
+---
+
+© 2026 Mariano De Laurentiis — Todos los derechos reservados.
+PHOTO SEQUENCE 24 es software propietario. Este repositorio publica únicamente los binarios y la documentación oficiales; el código fuente no se distribuye.
