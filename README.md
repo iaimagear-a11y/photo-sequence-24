@@ -34,3 +34,12 @@ y verificación profesional del video final.
 - Informe PDF con estadísticas y verificación del video final.
 - Interfaz en español, pensada para principiantes (pasos guiados, escalado de
   letra y manual completo).
+
+---
+
+## Apoyá el proyecto
+
+La app es gratuita. Si te sirvió y querés colaborar con su desarrollo,
+podés transferir el monto que quieras por alias (sin comisiones, al instante):
+
+**Alias: `mariano.foto.mdl`**
