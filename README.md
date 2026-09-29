@@ -9,21 +9,32 @@ y verificación profesional del video final.
 
 **Sitio oficial: [marianodelaurentiisfoto.com.ar](https://marianodelaurentiisfoto.com.ar)**
 
+> **Aviso legal:** © 2026 Mariano De Laurentiis — Todos los derechos reservados.
+> PHOTO SEQUENCE 24 es software propietario. Este repositorio publica únicamente
+> los binarios y la documentación oficiales; **el código fuente no se publica ni
+> se distribuye** (no se concede ninguna licencia sobre él).
+
 ---
 
-## Descargas — v3.3 (27/09/2026)
+## Descargas — v3.4 (29/09/2026) · edición multilingüe ES/EN
 
 | Archivo | Plataforma | Uso |
 |---|---|---|
-| [PHOTO-SEQUENCE-24-Windows-v3.3.exe](https://github.com/iaimagear-a11y/photo-sequence-24/releases/latest/download/PHOTO-SEQUENCE-24-Windows-v3.3.exe) | Windows 10/11 64-bit | Portable: ejecutar directo, sin instalar |
-| [Instalador_PHOTO_SEQUENCE_24_v3.3.exe](https://github.com/iaimagear-a11y/photo-sequence-24/releases/latest/download/Instalador_PHOTO_SEQUENCE_24_v3.3.exe) | Windows 10/11 64-bit | Instalador (acceso directo + desinstalador) |
-| [PHOTO-SEQUENCE-24-Linux-v3.3](https://github.com/iaimagear-a11y/photo-sequence-24/releases/latest/download/PHOTO-SEQUENCE-24-Linux-v3.3) | Linux x86_64 | Portable (requiere FFmpeg del sistema para video) |
-| [Instalador_PHOTO_SEQUENCE_24_Linux_v3.3.sh](https://github.com/iaimagear-a11y/photo-sequence-24/releases/latest/download/Instalador_PHOTO_SEQUENCE_24_Linux_v3.3.sh) | Linux x86_64 | Instalador con asistente |
-| [MANUAL_USUARIO_PHOTO_SEQUENCE_24.pdf](https://github.com/iaimagear-a11y/photo-sequence-24/releases/latest/download/MANUAL_USUARIO_PHOTO_SEQUENCE_24.pdf) | — | Manual de usuario completo |
-| [SHA256SUMS](https://github.com/iaimagear-a11y/photo-sequence-24/releases/latest/download/SHA256SUMS) | — | Hashes para verificar integridad |
+| [Instalador_PHOTO_SEQUENCE_24_v3.4.exe](https://github.com/iaimagear-a11y/photo-sequence-24/releases/download/v3.4/Instalador_PHOTO_SEQUENCE_24_v3.4.exe) | Windows 10/11 64-bit | Instalador (elegís español o inglés) + acceso directo + desinstalador |
+| [PHOTO-SEQUENCE-24-Windows-v3.4.exe](https://github.com/iaimagear-a11y/photo-sequence-24/releases/download/v3.4/PHOTO-SEQUENCE-24-Windows-v3.4.exe) | Windows 10/11 64-bit | Portable: ejecutar directo, sin instalar |
+| [PHOTO-SEQUENCE-24-Linux-v3.4](https://github.com/iaimagear-a11y/photo-sequence-24/releases/download/v3.4/PHOTO-SEQUENCE-24-Linux-v3.4) | Linux x86_64 | Portable (requiere FFmpeg del sistema para video) |
+| [Instalador_PHOTO_SEQUENCE_24_Linux_v3.4.sh](https://github.com/iaimagear-a11y/photo-sequence-24/releases/download/v3.4/Instalador_PHOTO_SEQUENCE_24_Linux_v3.4.sh) | Linux x86_64 | Instalador con asistente (pregunta el idioma) |
+| [MANUAL_USUARIO_PHOTO_SEQUENCE_24.pdf](https://github.com/iaimagear-a11y/photo-sequence-24/releases/download/v3.4/MANUAL_USUARIO_PHOTO_SEQUENCE_24.pdf) | — | Manual de usuario (español) |
+| [MANUAL_PHOTO_SEQUENCE_24_EN.pdf](https://github.com/iaimagear-a11y/photo-sequence-24/releases/download/v3.4/MANUAL_PHOTO_SEQUENCE_24_EN.pdf) | — | User manual (English) |
+| [SHA256SUMS](https://github.com/iaimagear-a11y/photo-sequence-24/releases/download/v3.4/SHA256SUMS) | — | Hashes para verificar integridad |
+
+Las versiones anteriores siguen publicadas en
+[Releases](https://github.com/iaimagear-a11y/photo-sequence-24/releases).
 
 ## Funciones principales
 
+- **Interfaz en español e inglés** (se elige al instalar y se cambia con el
+  botón "Idioma" dentro del programa).
 - Formatos: JPG, PNG, TIFF, BMP, WEBP y RAW (CR2/CR3/NEF/ARW/DNG/RAF/ORF/RW2/PEF/SRW).
 - Relación de aspecto: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3 — 1080p / 2K / 4K,
   sin deformar ni recortar (fondo desenfocado de la propia foto).
@@ -32,8 +43,6 @@ y verificación profesional del video final.
 - Estilos Fooocus: aplica el estilo elegido a cada foto vía IA antes de generar
   el video. Incluye generador de imágenes nuevas desde un texto.
 - Informe PDF con estadísticas y verificación del video final.
-- Interfaz en español, pensada para principiantes (pasos guiados, escalado de
-  letra y manual completo).
 
 ## Verificar integridad de la descarga
 
@@ -56,4 +65,8 @@ podés transferir el monto que quieras por alias (sin comisiones, al instante):
 ---
 
 © 2026 Mariano De Laurentiis — Todos los derechos reservados.
-PHOTO SEQUENCE 24 es software propietario. Este repositorio publica únicamente los binarios y la documentación oficiales; el código fuente no se distribuye.
+PHOTO SEQUENCE 24 es **software propietario**. Este repositorio publica
+únicamente los **binarios y la documentación oficiales**; el **código fuente no
+se publica ni se distribuye** y no se concede ninguna licencia sobre él.
+
+El texto completo está en [LICENSE](https://github.com/iaimagear-a11y/photo-sequence-24/blob/main/LICENSE). El programa se entrega "tal cual", sin garantía de ningún tipo.
