@@ -1,8 +1,7 @@
-import os,json,pathlib,urllib.request,hashlib,tarfile,shutil
+import os,json,pathlib,urllib.request,urllib.error,hashlib,tarfile,shutil,time
 repo=os.environ['GITHUB_REPOSITORY'];token=os.environ['GH_TOKEN'];root=pathlib.Path(os.environ['RUNNER_TEMP'])/'ps24-private-source';out=pathlib.Path(os.environ['RUNNER_TEMP'])/'additional-packages';out.mkdir()
 headers={'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}
 base='https://api.github.com/repos/'+repo
-with urllib.request.urlopen(urllib.request.Request(base+'/releases/tags/v3.5',headers=headers)) as response:release=json.load(response)
 for src,name in [('android/app/build/outputs/apk/debug/app-debug.apk','PhotoSequence24-Android-v3.5-beta.apk'),('android/app/build/outputs/bundle/release/app-release.aab','PhotoSequence24-Android-v3.5-sin-firmar.aab')]:shutil.copyfile(root/src,out/name)
 stage=out/'PhotoSequence24-Linux-v3.5';stage.mkdir();shutil.copytree(root/'desktop/dist/PhotoSequence24',stage/'PhotoSequence24')
 for name in ['Instalar.sh','Desinstalar.sh','LEEME.txt']:
@@ -13,6 +12,15 @@ archive=out/'PhotoSequence24-Linux-v3.5-beta.tar.gz'
 with tarfile.open(archive,'w:gz') as tar:tar.add(stage,arcname=stage.name)
 files=[out/'PhotoSequence24-Android-v3.5-beta.apk',out/'PhotoSequence24-Android-v3.5-sin-firmar.aab',archive]
 checksums=out/'SHA256SUMS-ANDROID-LINUX';checksums.write_text('\n'.join(hashlib.sha256(f.read_bytes()).hexdigest()+'  '+f.name for f in files)+'\n');files.append(checksums)
+for attempt in range(180):
+ try:
+  with urllib.request.urlopen(urllib.request.Request(base+'/releases/tags/v3.5',headers=headers),timeout=30) as response:release=json.load(response)
+  break
+ except urllib.error.HTTPError as error:
+  if error.code!=404:raise
+  if attempt==0:print('Packages built; waiting for verified Windows release.',flush=True)
+  time.sleep(10)
+else:raise TimeoutError('Verified Windows release is not available')
 existing={a['name'] for a in release['assets']}
 for f in files:
  if f.name in existing:raise RuntimeError('Existing asset will not be overwritten: '+f.name)
