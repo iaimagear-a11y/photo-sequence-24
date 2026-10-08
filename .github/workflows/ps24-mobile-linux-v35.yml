@@ -57,3 +57,10 @@ jobs:
           desktop/.venv/bin/python -c "import json,os; d=json.load(open(os.environ['RUNNER_TEMP']+'/linux-native-test.json')); assert d['success'] and d['styles']==277"
       - name: Package and publish beta binaries
         run: python .build/v3.5/publish_extra.py
+      - name: Keep verified package artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: PhotoSequence24-v3.5-Android-Linux
+          path: ${{ runner.temp }}/additional-packages/*.*
+          if-no-files-found: error
