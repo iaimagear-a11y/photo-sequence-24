@@ -11,10 +11,11 @@ for attempt in range(60):
  time.sleep(.5)
 print('Application local ports:',sorted(ports),flush=True)
 for port in ports:
- try:
-  with local.open('http://127.0.0.1:'+str(port)+'/',timeout=3) as response:
-   data=response.read();print('Local application HTTP:',port,response.status,response.headers.get('Content-Type'),len(data),b'id="style"' in data,flush=True)
- except Exception as error:print('Local application HTTP error:',port,str(error),flush=True)
+ for page_path in ['/', '/index.html']:
+  try:
+   with local.open('http://127.0.0.1:'+str(port)+page_path,timeout=3) as response:
+    data=response.read();print('Local application HTTP:',port,page_path,response.status,response.headers.get('Content-Type'),len(data),b'id="style"' in data,flush=True)
+  except Exception as error:print('Local application HTTP error:',port,page_path,str(error),flush=True)
 for attempt in range(15):
  try:
   with local.open('http://127.0.0.1:9222/json',timeout=1) as response:pages=json.load(response)
