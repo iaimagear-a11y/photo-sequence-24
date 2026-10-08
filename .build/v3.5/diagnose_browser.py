@@ -1,12 +1,29 @@
-import json,time,urllib.request,websocket
-for attempt in range(90):
+import json,time,urllib.request,websocket,psutil
+local=urllib.request.build_opener(urllib.request.ProxyHandler({}))
+for attempt in range(60):
+ ports=set()
+ for process in psutil.process_iter(['name']):
+  if 'PHOTO-SEQUENCE-24' not in (process.info['name'] or ''):continue
+  try:
+   ports.update(c.laddr.port for c in process.net_connections(kind='inet') if c.status=='LISTEN' and c.laddr.ip=='127.0.0.1')
+  except Exception:pass
+ if ports:break
+ time.sleep(.5)
+print('Application local ports:',sorted(ports),flush=True)
+for port in ports:
  try:
-  with urllib.request.urlopen('http://127.0.0.1:9222/json',timeout=2) as response:pages=json.load(response)
+  with local.open('http://127.0.0.1:'+str(port)+'/',timeout=3) as response:
+   data=response.read();print('Local application HTTP:',port,response.status,response.headers.get('Content-Type'),len(data),b'id="style"' in data,flush=True)
+ except Exception as error:print('Local application HTTP error:',port,str(error),flush=True)
+for attempt in range(15):
+ try:
+  with local.open('http://127.0.0.1:9222/json',timeout=1) as response:pages=json.load(response)
   targets=[p for p in pages if p.get('type')=='page']
   if targets:break
  except Exception:pass
  time.sleep(1)
-else:raise RuntimeError('No browser debugging target')
+else:
+ print('No browser debugging target; local HTTP diagnosis completed.',flush=True);raise SystemExit(0)
 for page in targets:
  print('Browser target:',page.get('url'),page.get('title'),flush=True)
  ws=websocket.create_connection(page['webSocketDebuggerUrl'],timeout=10,suppress_origin=True)
