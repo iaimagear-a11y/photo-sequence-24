@@ -1,0 +1,56 @@
+name: v3.5 Linux and Android packages
+on:
+  pull_request:
+    types: [opened, reopened]
+    branches: [main]
+    paths: ['.github/workflows/ps24-mobile-linux-v35.yml']
+permissions:
+  contents: read
+jobs:
+  packages:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'build/mobile-linux-v3.5'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      SOURCE_BRANCH: build/mobile-linux-v3.5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: build/mobile-linux-v3.5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - name: Receive encrypted private source
+        run: |
+          pip install cryptography
+          python .build/v3.5/encrypted_source_gate.py
+      - name: Build and verify Android
+        run: |
+          sdkmanager 'platforms;android-36' 'build-tools;36.0.0'
+          cd "$RUNNER_TEMP/ps24-private-source/android"
+          chmod +x gradlew
+          ./gradlew --no-daemon assembleDebug bundleRelease lintDebug
+      - name: Build and verify Linux
+        env:
+          QT_QPA_PLATFORM: offscreen
+          QTWEBENGINE_DISABLE_SANDBOX: '1'
+          QTWEBENGINE_CHROMIUM_FLAGS: --disable-gpu
+          QT_API: pyqt6
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg libegl1 libopengl0 libxcb-cursor0 libxkbcommon-x11-0 libnss3 libasound2
+          cd "$RUNNER_TEMP/ps24-private-source"
+          sh build-scripts/build-linux.sh
+          desktop/.venv/bin/python -m unittest discover -s tests -p test_studio.py -v
+          desktop/dist/PhotoSequence24/PhotoSequence24 --self-test --self-test-output "$RUNNER_TEMP/linux-native-test.json"
+          desktop/.venv/bin/python -c "import json,os; d=json.load(open(os.environ['RUNNER_TEMP']+'/linux-native-test.json')); assert d['success'] and d['styles']==277"
+      - name: Package and publish beta binaries
+        run: python .build/v3.5/publish_extra.py
