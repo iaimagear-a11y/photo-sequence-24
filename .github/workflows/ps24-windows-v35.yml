@@ -28,6 +28,15 @@ jobs:
         run: python -m pip install cryptography
       - name: Receive encrypted application source
         run: python .build/v3.5/encrypted_source_gate.py
+      - name: Verify source native interface before packaging
+        timeout-minutes: 3
+        shell: powershell
+        run: |
+          python -m pip install -r "$env:RUNNER_TEMP\ps24-private-source\desktop\requirements-studio.txt"
+          if ($LASTEXITCODE -ne 0) { throw 'Interface dependencies failed' }
+          python "$env:RUNNER_TEMP\ps24-private-source\desktop\studio.py" --self-test --self-test-output "$env:RUNNER_TEMP\source-native-report.json"
+          if ($LASTEXITCODE -ne 0) { throw 'Source interface startup failed' }
+          Get-Content "$env:RUNNER_TEMP\source-native-report.json" -Raw
       - name: Install Inno Setup
         shell: powershell
         run: choco install innosetup --yes --no-progress
