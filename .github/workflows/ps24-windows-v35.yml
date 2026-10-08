@@ -47,7 +47,8 @@ jobs:
       - name: Verify compiled portable interface
         shell: powershell
         run: |
-          $exe = Get-ChildItem "$env:RUNNER_TEMP\ps24-output\Windows-*" -Filter 'PHOTO-SEQUENCE-24-Windows-v3.5.exe' | Select-Object -First 1
+          $releaseFolder = Get-ChildItem "$env:RUNNER_TEMP\ps24-output" -Directory -Filter 'Windows-*' | Select-Object -First 1
+          $exe = Get-ChildItem -LiteralPath $releaseFolder.FullName -Filter 'PHOTO-SEQUENCE-24-Windows-v3.5.exe' | Select-Object -First 1
           $report = "$env:RUNNER_TEMP\ps24-native-test.json"
           $process = Start-Process -FilePath $exe.FullName -ArgumentList @('--self-test','--self-test-output',('"'+$report+'"')) -PassThru
           if (!$process.WaitForExit(120000)) { $process.Kill(); throw 'Compiled EXE startup timed out' }
@@ -58,6 +59,7 @@ jobs:
       - name: Publish tested Windows binaries and manuals
         run: python .build/v3.5/publish_build.py
       - name: Keep download artifacts
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: PhotoSequence24-v3.5-Windows
