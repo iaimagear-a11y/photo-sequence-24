@@ -1,30 +1,71 @@
-name: Diagnose Windows v3.5 startup
+name: Windows v3.5 - encrypted private source build
 on:
   pull_request:
     types: [opened, reopened]
     branches: [main]
     paths: ['.github/workflows/ps24-windows-v35.yml']
 permissions:
-  actions: read
   contents: read
 jobs:
-  diagnose:
+  build-windows:
     if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'build/windows-v3.5'
     runs-on: windows-latest
-    timeout-minutes: 10
+    timeout-minutes: 60
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      SOURCE_BRANCH: build/windows-v3.5
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/checkout@v4
         with:
-          name: PhotoSequence24-v3.5-Windows
-          run-id: 37748021462
-          github-token: ${{ github.token }}
-          path: ${{ runner.temp }}/retest
-      - name: Report packaged native startup
+          ref: build/windows-v3.5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          architecture: x64
+      - name: Prepare encrypted source transport
+        run: python -m pip install cryptography
+      - name: Receive encrypted application source
+        run: python .build/v3.5/encrypted_source_gate.py
+      - name: Install Inno Setup
+        shell: powershell
+        run: choco install innosetup --yes --no-progress
+      - name: Compile installer and standalone portable EXE
         shell: powershell
         run: |
-          $exe = Get-ChildItem "$env:RUNNER_TEMP\retest" -Recurse -Filter 'PHOTO-SEQUENCE-24-Windows-v3.5.exe' | Select-Object -First 1
-          $report = "$env:RUNNER_TEMP\native-report.json"
+          & "$env:RUNNER_TEMP\ps24-private-source\build-scripts\build-windows.ps1" -OutputDirectory "$env:RUNNER_TEMP\ps24-output"
+      - name: Verify Windows export engine
+        shell: powershell
+        run: |
+          $build = Get-ChildItem "$env:RUNNER_TEMP\ps24-output" -Directory -Filter 'compilacion-*' | Select-Object -First 1
+          $python = Join-Path $build.FullName 'entorno\Scripts\python.exe'
+          $ffmpeg = Get-ChildItem $build.FullName -Filter ffmpeg.exe -Recurse | Where-Object { $_.FullName -like '*\ffmpeg\*' } | Select-Object -First 1
+          $env:PATH = $ffmpeg.DirectoryName + ';' + $env:PATH
+          & $python -m unittest discover -s "$env:RUNNER_TEMP\ps24-private-source\tests" -p test_studio.py -v
+          if ($LASTEXITCODE -ne 0) { throw 'Windows FFmpeg export tests failed' }
+      - name: Verify compiled portable interface
+        shell: powershell
+        run: |
+          $releaseFolder = Get-ChildItem "$env:RUNNER_TEMP\ps24-output" -Directory -Filter 'Windows-*' | Select-Object -First 1
+          $exe = Get-ChildItem -LiteralPath $releaseFolder.FullName -Filter 'PHOTO-SEQUENCE-24-Windows-v3.5.exe' | Select-Object -First 1
+          $report = "$env:RUNNER_TEMP\ps24-native-test.json"
           $process = Start-Process -FilePath $exe.FullName -ArgumentList @('--self-test','--self-test-output',('"'+$report+'"')) -PassThru
-          if (!$process.WaitForExit(120000)) { $process.Kill(); throw 'Startup timed out' }
-          if (Test-Path $report) { Get-Content $report -Raw } else { throw 'No report generated' }
-          Write-Host "Exit code: $($process.ExitCode)"
+          if (!$process.WaitForExit(120000)) { $process.Kill(); throw 'Compiled EXE startup timed out' }
+          if (!(Test-Path $report)) { throw 'Compiled EXE did not produce its test report' }
+          Get-Content $report -Raw
+          $data = Get-Content $report -Raw | ConvertFrom-Json
+          if (!$data.success -or $data.styles -ne 277) { throw 'Compiled EXE native bridge failed' }
+          Write-Host "Native EXE verified: $($data.styles) styles, $($data.status)"
+      - name: Publish tested Windows binaries and manuals
+        run: python .build/v3.5/publish_build.py
+      - name: Keep download artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: PhotoSequence24-v3.5-Windows
+          path: |
+            ${{ runner.temp }}/ps24-output/Windows-*/*.exe
+            ${{ runner.temp }}/ps24-output/Windows-*/*.zip
+            ${{ runner.temp }}/ps24-output/Windows-*/*.pdf
+          if-no-files-found: error
