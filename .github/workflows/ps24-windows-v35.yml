@@ -30,7 +30,7 @@ jobs:
         run: python .build/v3.5/encrypted_source_gate.py
       - name: Install Inno Setup
         shell: powershell
-        run: choco install innosetup --version=6.7.3 --yes --no-progress
+        run: choco install innosetup --yes --no-progress
       - name: Compile installer and standalone portable EXE
         shell: powershell
         run: |
