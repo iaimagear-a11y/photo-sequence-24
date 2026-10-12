@@ -1,72 +1,35 @@
 # PHOTO SEQUENCE 24
 
-Convierte una carpeta de fotografías en un **stop motion a 24 FPS** (FPS 4-30
-seleccionable), listo para editar en Adobe Premiere Pro, DaVinci Resolve, After
-Effects o cualquier editor profesional. Para **Windows 10/11 y Linux**.
+Autor: Mariano De Laurentiis. [Sitio oficial](https://marianodelaurentiisfoto.com.ar).
 
-Los originales nunca se modifican. Incluye estilos de imagen con IA, informe PDF
-y verificación profesional del video final.
+## Windows Studio 3.5.1 Beta - 12/10/2026
 
-**Sitio oficial: [marianodelaurentiisfoto.com.ar](https://marianodelaurentiisfoto.com.ar)**
+Stop motion, Imagen IA y Video IA en una pantalla en castellano e inglés. Estilos Fooocus y personalizados, audio de música y narración, subtítulos SRT, proyectos y exportación MP4 H.264/AAC. Las 277 referencias incluidas funcionan offline. Una imagen sola se guarda sin FPS como JPG/JPEG/PNG; RAW copia el original. Ambos motores ofrecen Sin motor. Narración / voces da acceso a voces Windows, ElevenLabs y Microsoft en línea con cuenta y cuota F0 limitada. La ayuda API enlaza tutoriales oficiales.
 
-> **Aviso legal:** © 2026 Mariano De Laurentiis — Todos los derechos reservados.
-> PHOTO SEQUENCE 24 es software propietario. Este repositorio publica únicamente
-> los binarios y la documentación oficiales; **el código fuente no se publica ni
-> se distribuye** (no se concede ninguna licencia sobre él).
+- [PHOTO-SEQUENCE-24-Windows-v3.5.1.exe](https://github.com/iaimagear-a11y/photo-sequence-24/releases/download/v3.5/PHOTO-SEQUENCE-24-Windows-v3.5.1.exe)
+- [Instalador_PHOTO_SEQUENCE_24_v3.5.1.exe](https://github.com/iaimagear-a11y/photo-sequence-24/releases/download/v3.5/Instalador_PHOTO_SEQUENCE_24_v3.5.1.exe)
+- [Manual_PhotoSequence24_Windows_v3.5.1_Castellano.pdf](https://github.com/iaimagear-a11y/photo-sequence-24/releases/download/v3.5/Manual_PhotoSequence24_Windows_v3.5.1_Castellano.pdf)
+- [Manual_PhotoSequence24_Windows_v3.5.1_English.pdf](https://github.com/iaimagear-a11y/photo-sequence-24/releases/download/v3.5/Manual_PhotoSequence24_Windows_v3.5.1_English.pdf)
+- [SHA256SUMS.txt](https://github.com/iaimagear-a11y/photo-sequence-24/releases/download/v3.5/SHA256SUMS.txt)
+- [INFORME_WINDOWS_3.5.1.md](https://github.com/iaimagear-a11y/photo-sequence-24/releases/download/v3.5/INFORME_WINDOWS_3.5.1.md)
 
----
+El portable se ejecuta sin instalar. El instalador crea acceso y registro de desinstalación. Requiere Windows de 64 bits y Microsoft Edge WebView2 Runtime; FFmpeg/FFprobe incluidos. El idioma se cambia arriba a la derecha de la aplicación.
 
-## Descargas — v3.4 (29/09/2026) · edición multilingüe ES/EN
+Verificado en Windows 11: 99 pruebas Python, interfaz WebView2, ambos EXE, exportación MP4 con audio/subtítulos y ciclo de instalación/desinstalación/reinstalación. La IA se probó con respuestas simuladas; acceso, cuotas, facturación y calidad de cuentas reales pendientes. No se acredita compatibilidad con todos los equipos/códecs. EXE sin firma comercial; antivirus de los nuevos hashes pendiente.
 
-| Archivo | Plataforma | Uso |
-|---|---|---|
-| [Instalador_PHOTO_SEQUENCE_24_v3.4.exe](https://github.com/iaimagear-a11y/photo-sequence-24/releases/download/v3.4/Instalador_PHOTO_SEQUENCE_24_v3.4.exe) | Windows 10/11 64-bit | Instalador (elegís español o inglés) + acceso directo + desinstalador |
-| [PHOTO-SEQUENCE-24-Windows-v3.4.exe](https://github.com/iaimagear-a11y/photo-sequence-24/releases/download/v3.4/PHOTO-SEQUENCE-24-Windows-v3.4.exe) | Windows 10/11 64-bit | Portable: ejecutar directo, sin instalar |
-| [PHOTO-SEQUENCE-24-Linux-v3.4](https://github.com/iaimagear-a11y/photo-sequence-24/releases/download/v3.4/PHOTO-SEQUENCE-24-Linux-v3.4) | Linux x86_64 | Portable (requiere FFmpeg del sistema para video) |
-| [Instalador_PHOTO_SEQUENCE_24_Linux_v3.4.sh](https://github.com/iaimagear-a11y/photo-sequence-24/releases/download/v3.4/Instalador_PHOTO_SEQUENCE_24_Linux_v3.4.sh) | Linux x86_64 | Instalador con asistente (pregunta el idioma) |
-| [MANUAL_USUARIO_PHOTO_SEQUENCE_24.pdf](https://github.com/iaimagear-a11y/photo-sequence-24/releases/download/v3.4/MANUAL_USUARIO_PHOTO_SEQUENCE_24.pdf) | — | Manual de usuario (español) |
-| [MANUAL_PHOTO_SEQUENCE_24_EN.pdf](https://github.com/iaimagear-a11y/photo-sequence-24/releases/download/v3.4/MANUAL_PHOTO_SEQUENCE_24_EN.pdf) | — | User manual (English) |
-| [SHA256SUMS](https://github.com/iaimagear-a11y/photo-sequence-24/releases/download/v3.4/SHA256SUMS) | — | Hashes para verificar integridad |
+## Versiones anteriores y otras plataformas
 
-Las versiones anteriores siguen publicadas en
-[Releases](https://github.com/iaimagear-a11y/photo-sequence-24/releases).
+[Publicación 3.5 con Windows actualizado](https://github.com/iaimagear-a11y/photo-sequence-24/releases/tag/v3.5). Android y Linux en esa publicación mantienen sus paquetes históricos 3.5; no son entregas nuevas 3.5.1. Los manuales generales 3.5 son históricos: para Windows usá los dos manuales nuevos enlazados arriba.
 
-## Funciones principales
+[v3.4 clásica ES/EN](https://github.com/iaimagear-a11y/photo-sequence-24/releases/tag/v3.4) y [todas las versiones](https://github.com/iaimagear-a11y/photo-sequence-24/releases). Los controles Studio de esta edición exportan MP4 H.264/AAC o una imagen fija JPG/JPEG/PNG; RAW solo copia el original de cámara; no incluyen los formatos alternativos de la interfaz clásica.
 
-- **Interfaz en español e inglés** (se elige al instalar y se cambia con el
-  botón "Idioma" dentro del programa).
-- Formatos: JPG, PNG, TIFF, BMP, WEBP y RAW (CR2/CR3/NEF/ARW/DNG/RAF/ORF/RW2/PEF/SRW).
-- Relación de aspecto: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3 — 1080p / 2K / 4K,
-  sin deformar ni recortar (fondo desenfocado de la propia foto).
-- FPS: 4, 8, 12, 16, 18, 20, 24, 30. Frames por foto configurable.
-- Salida: MP4 (H.264 / H.265), ProRes (MOV) y secuencia PNG para editores.
-- Estilos Fooocus: aplica el estilo elegido a cada foto vía IA antes de generar
-  el video. Incluye generador de imágenes nuevas desde un texto.
-- Informe PDF con estadísticas y verificación del video final.
+## Verificar la descarga
 
-## Verificar integridad de la descarga
-
-Cada versión publica `SHA256SUMS` con el hash SHA-256 de cada archivo. Para comprobar que tu descarga llegó completa y sin alteraciones:
-
-- **Windows (PowerShell):** `Get-FileHash .\NOMBRE_DEL_ARCHIVO -Algorithm SHA256`
-- **Linux:** `sha256sum NOMBRE_DEL_ARCHIVO` (o `sha256sum -c SHA256SUMS` dentro de la carpeta)
-
-El hash calculado debe coincidir con el publicado en [SHA256SUMS](https://github.com/iaimagear-a11y/photo-sequence-24/releases/latest/download/SHA256SUMS). Si coincide, el archivo es exactamente el que publicó el desarrollador.
-
----
+En PowerShell: `Get-FileHash .\NOMBRE_DEL_ARCHIVO -Algorithm SHA256`. Compará el resultado con SHA256SUMS.txt de esta entrega.
 
 ## Apoyá el proyecto
 
-La app es gratuita. Si te sirvió y querés colaborar con su desarrollo,
-podés transferir el monto que quieras por alias (sin comisiones, al instante):
+Alias: **mariano.foto.mdl**.
 
-**Alias: `mariano.foto.mdl`**
+© 2026 Mariano De Laurentiis - Todos los derechos reservados. PHOTO SEQUENCE 24 es software propietario. Este repositorio publica únicamente los binarios y documentos oficiales; el código fuente no se publica ni se distribuye y no se concede licencia sobre él. [LICENSE](https://github.com/iaimagear-a11y/photo-sequence-24/blob/main/LICENSE).
 
----
-
-© 2026 Mariano De Laurentiis — Todos los derechos reservados.
-PHOTO SEQUENCE 24 es **software propietario**. Este repositorio publica
-únicamente los **binarios y la documentación oficiales**; el **código fuente no
-se publica ni se distribuye** y no se concede ninguna licencia sobre él.
-
-El texto completo está en [LICENSE](https://github.com/iaimagear-a11y/photo-sequence-24/blob/main/LICENSE). El programa se entrega "tal cual", sin garantía de ningún tipo.
